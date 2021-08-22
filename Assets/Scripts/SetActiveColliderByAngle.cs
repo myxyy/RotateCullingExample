@@ -4,10 +4,10 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRC.Udon;
 
-public class SetActiveByAngle : UdonSharpBehaviour
+public class SetActiveColliderByAngle : UdonSharpBehaviour
 {
     [SerializeField] private ObjectAngleManager playerAngle;
-    [SerializeField] private GameObject[] objects;
+    [SerializeField] private Collider collider;
     [SerializeField] private int period = 1;
     [SerializeField] private float appearMin = 0.0f;
     [SerializeField] private float appearMax = 1.0f;
@@ -70,9 +70,6 @@ public class SetActiveByAngle : UdonSharpBehaviour
             (appearMin < appearMax) ?
             (appearMin < relativeAngle && relativeAngle < appearMax) :
             (appearMin < relativeAngle || relativeAngle < appearMax);
-        foreach (var obj in objects)
-        {
-            obj.SetActive(isAppeared);
-        }
+        collider.enabled = isAppeared;
     }
 }
