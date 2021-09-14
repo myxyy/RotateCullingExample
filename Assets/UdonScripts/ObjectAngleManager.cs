@@ -18,16 +18,11 @@ public class ObjectAngleManager: UdonSharpBehaviour
         return Mathf.Floor(Mathf.Repeat(netNormalizedAngle, m)) + normalizedAngle;
     }
 
-    private float dotFloatAngles(float a, float b)
-    {
-        var va = new Vector2(Mathf.Cos(tau * a), Mathf.Sin(tau * a));
-        var vb = new Vector2(Mathf.Cos(tau * b), Mathf.Sin(tau * b));
-        return Vector2.Dot(va, vb);
-    }
     private float getFloatAngle(Vector3 p)
     {
         return Mathf.Repeat(Mathf.Atan2(p.z, p.x) / tau, 1);
     }
+
     private float getNormalizedAngle(float previousNetNormalizedAngle, float currentNormalizedAngle)
     {
         var currentNetNormalizedAngleCandidate_0 = Mathf.Floor(previousNetNormalizedAngle) + currentNormalizedAngle;
@@ -43,6 +38,7 @@ public class ObjectAngleManager: UdonSharpBehaviour
         else
             return currentNetNormalizedAngleCandidate_p;
     }
+
     void Start()
     {
         if (trackingObject == null) trackingObject = this.transform;
